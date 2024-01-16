@@ -1,66 +1,124 @@
-hr {
-  width: 50%;
-  border: 1px solid white;
+.top-container {
+  margin-top: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+gap: 2%;
+
 }
+.title-image {
+  width: 50px;
+
+  margin-bottom: 10px;
+}
+h1 {
+  margin: 0;
+}
+#copyImg {
+  width: 8%;
+  height: 4%;
+}
+
 body {
-  background-color: black;
+  background-color: #2A2630;
   color: white;
 }
 
-main {
-  margin-top: 7%;
-  background-color: white;
+
+/*.mail-section {*/
+/*  margin-top: 8%;*/
+/*  margin-left: 28%;*/
+/*  font-size: 120%;*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  gap: 1%;*/
+/*  align-items: center; !* Change this to center vertically if needed *!*/
+/*  justify-content: center;*/
+/*  text-align: center;*/
+/*  border: 3px dashed dimgray; !* Add border with dotted lines *!*/
+/*  padding: 20px; !* Add padding for spacing inside the rectangle *!*/
+/*  width: 40%; !* Adjust width as needed *!*/
+/*  height: 40%; !* Adjust height as needed *!*/
+/*}*/
+
+
+.mail-section {
+  margin-top: 8%;
+  margin-left: 28%;
+  font-size: 120%;
   display: flex;
-  justify-content: center;
+  gap: 1%;
   align-items: center;
-  height: 80vh;
-}
-
-h1{
-
+  justify-content: center;
   text-align: center;
-
+  flex-direction: column; /* Change to column for vertical arrangement */
+  border: 3px dashed dimgray;
+  padding: 20px;
+  width: 40%;
+  height: 40%;
 }
-h2
-{
-  margin-top:5%;
-  top: 110%;
-  text-align: center;
 
-}
-.head-container {
+.content-container {
   display: flex;
-  justify-content: center;
+  margin-left: 2%;
+  gap: 3%;
   align-items: center;
-  flex-wrap: wrap;
-  text-align: center;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  justify-content: center;
+  flex-direction: row; /* Change to row for horizontal arrangement */
 }
 
-.head-container > * {
-  margin: 5px;
-}
 
 #countdown {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 10px;
+
 }
 
-#restartBtn {
-  padding: 8px 16px;
-  font-size: 16px;
-}
+
 .window-container {
-  width: 70%;
-  max-width: 600px;
+  max-width: 700px;
   height: 70%;
   border: 2px solid white;
   border-radius: 10px;
   padding: 20px;
+margin: 0 auto;
   box-sizing: border-box;
-  background-color: #333;
+  background-color: #2A2630;
+
+  /* Center the container horizontally and vertically */
+  position: relative;
+  top: 5%;
+
+  /*transform: translate(-50%, -50%);*/
 }
+
+
+main {
+  margin-top: 7%;
+  background-color: white;
+  /*display: flex;*/
+  justify-content: center;
+  align-items: center;
+  height: 120vh;
+}
+.centered-buttons {
+  display: flex;
+  gap: 2%;
+  justify-content: center;
+  align-items: center;
+
+}
+.custom-button {
+  margin-top: 2%;
+  font-size: 100%;
+  padding: 15px 30px; /* Increase the padding for a bigger size */
+  border-radius: 50px;
+  background-color: #fff;
+  color: black;
+  border: none; /* Remove the border property */
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
