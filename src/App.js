@@ -1,14 +1,20 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
+import Mail from './Mail.json';
+import Lottie from "lottie-react";
 import copyImage from '/Users/mistercap/WebstormProjects/jailbreakermail/src/copy-7571066_960_720.webp';
 import titlePhoto from '/Users/mistercap/WebstormProjects/jailbreakermail/src/1492692368-7email_83536.png';
 
 function App() {
-
   const [email, setEmail] = useState('');
   const [emailList, setEmailList] = useState([]);
   const [selectedEmail,setSelectedEmail] = useState(null);
-  let timerInterval;
+  const [positionX,setPositionX] = useState(0);
+  const [positionY,setPositionY] = useState(0);
+  // let timerInterval;
+
+
+
   const getEmail = async () => {
     try {
       const response = await fetch('http://backend/getEmail', {
@@ -71,31 +77,31 @@ setSelectedEmail({...emailList.find(email => email.id === emailId), ...message})
         getEmail();
         getEmailList();
 
-    const tenMinutes = 60 * 10;
-    const display = document.getElementById('countdown');
+    // const tenMinutes = 60 * 10;
+    // const display = document.getElementById('countdown');
 
-    function startTimer(duration) {
-      let timer = duration;
-      timerInterval = setInterval(function () {
-
-        let minutes = Math.floor(timer / 60);
-
-        let seconds = timer % 60;
-
-
-        minutes = minutes < 10 ? `0${minutes}` : minutes;
-        seconds = seconds < 10 ? `0${seconds}` : seconds;
-
-        display.textContent = `${minutes}:${seconds}`;
-
-        if (--timer < 0) {
-          clearInterval(timerInterval);
-          display.textContent = 'Timer Expired';
-          updateArticleContent();
-        }
-      }, 1000);
-
-    }
+    // function startTimer(duration) {
+    //   let timer = duration;
+    //   timerInterval = setInterval(function () {
+    //
+    //     let minutes = Math.floor(timer / 60);
+    //
+    //     let seconds = timer % 60;
+    //
+    //
+    //     minutes = minutes < 10 ? `0${minutes}` : minutes;
+    //     seconds = seconds < 10 ? `0${seconds}` : seconds;
+    //
+    //     display.textContent = `${minutes}:${seconds}`;
+    //
+    //     if (--timer < 0) {
+    //       clearInterval(timerInterval);
+    //       display.textContent = 'Timer Expired';
+    //       updateArticleContent();
+    //     }
+    //   }, 1000);
+    //
+    // }
 
     const copyButton = document.getElementById('copyImg');
     if(copyButton)
@@ -126,14 +132,14 @@ setSelectedEmail({...emailList.find(email => email.id === emailId), ...message})
       return textArray[randomIndex];
     }
 
-    startTimer(tenMinutes);
+    // startTimer(tenMinutes);
     updateArticleContent();
 
 
-    return () => {
-      clearInterval(timerInterval);
-
-    };
+    // return () => {
+    //   clearInterval(timerInterval);
+    //
+    // };
   },[]);
 
   return (
@@ -148,15 +154,31 @@ setSelectedEmail({...emailList.find(email => email.id === emailId), ...message})
           <div className="content-container">
             <article id="content-copy">template@icloud.com</article>
             <img id="copyImg" src={copyImage} alt="Copy Image" />
-            <p id="countdown"></p>
+            {/*<p id="countdown"></p>*/}
           </div>
         </div>
+        <div className="mailbox-text">
+          <p>Forget about spam, advertising mailings, hacking and attacking robots. Keep your real mailbox clean and secure. JailBreak My Mail provides temporary, secure, anonymous, free, disposable email address.</p>
+        </div>
         <main>
-
           <div className="window-container">
             <div className="content-main">
-              <h1>Email: {email}</h1>
-              <h2>Email List:</h2>
+              <h1>Sender</h1>
+              <h1>Subject</h1>
+              <h1>View</h1>
+            </div>
+            <div className="content-divider"></div>
+            <div className="lower-content">
+          <br/>
+            <br/>
+            <div className="inbox-empty-msg">
+           <Lottie className="mailfloating" animationData={Mail}/>
+              <div className="emptyInboxTitle">
+                <p>Your inbox is empty</p>
+              <p>Waiting for incoming emails</p>
+            </div>
+              {/*<h1>Email: {email}</h1>*/}
+              {/*<h2>Email List:</h2>*/}
               <ul>
                 {emailList.map(email => (
                     <li key={email.id} onClick={() => handleEmailClick(email.id)}>
@@ -166,20 +188,22 @@ setSelectedEmail({...emailList.find(email => email.id === emailId), ...message})
                     </li>
                 ))}
               </ul>
-              {selectedEmail && (
-                  <div>
-                    <h2>Selected Email:</h2>
-                    <p>ID: {selectedEmail.id}</p>
-                    <p>Date Received: {selectedEmail.dateReceived}</p>
-                    <p>Email Subject: {selectedEmail.emailSubject}</p>
-                    <p>Message Body: {selectedEmail.messageBody}</p>
-                  </div>
-              )}
-
-            </div>
+              {/*{selectedEmail && (*/}
+              {/*    <div>*/}
+              {/*      <h2>Selected Email:</h2>*/}
+              {/*      <p>ID: {selectedEmail.id}</p>*/}
+              {/*      <p>Date Received: {selectedEmail.dateReceived}</p>*/}
+              {/*      <p>Email Subject: {selectedEmail.emailSubject}</p>*/}
+              {/*      <p>Message Body: {selectedEmail.messageBody}</p>*/}
+              {/*    </div>*/}
+              {/*)} */}
+          </div>
+          </div>
           </div>
         </main>
       </div>
+
+
   );
 
 }

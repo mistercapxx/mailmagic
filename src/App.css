@@ -1,9 +1,10 @@
 .top-container {
-  margin-top: 3%;
+  margin-top: 2%;
   display: flex;
   justify-content: center;
   align-items: center;
 gap: 2%;
+  margin-bottom: 3%;
 
 }
 .title-image {
@@ -32,30 +33,44 @@ body {
 /*  display: flex;*/
 /*  flex-direction: row;*/
 /*  gap: 1%;*/
-/*  align-items: center; !* Change this to center vertically if needed *!*/
+/*  align-items: center;
 /*  justify-content: center;*/
 /*  text-align: center;*/
-/*  border: 3px dashed dimgray; !* Add border with dotted lines *!*/
-/*  padding: 20px; !* Add padding for spacing inside the rectangle *!*/
-/*  width: 40%; !* Adjust width as needed *!*/
-/*  height: 40%; !* Adjust height as needed *!*/
+/*  border: 3px dashed dimgray;
+/*  padding: 20px;
+/*  width: 40%;
+/*  height: 40%;
 /*}*/
 
 
 .mail-section {
-  margin-top: 8%;
+  margin-top: 2%;
   margin-left: 28%;
-  font-size: 120%;
+  font-family: Futura;
+  font-size: 110%;
   display: flex;
   gap: 1%;
   align-items: center;
   justify-content: center;
   text-align: center;
-  flex-direction: column; /* Change to column for vertical arrangement */
+  flex-direction: column; /* vertical arrangement */
   border: 3px dashed dimgray;
   padding: 20px;
   width: 40%;
   height: 40%;
+}
+.mailbox-text {
+  text-align: center;
+  padding-top: 50px;
+  color: #7a7c80;
+  font-size: 14px;
+  font-family: 'Roboto Mono', monospace!important;
+  font-weight: 500;
+  margin: 0 auto;
+}
+.mailbox-text p {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .content-container {
@@ -64,7 +79,7 @@ body {
   gap: 3%;
   align-items: center;
   justify-content: center;
-  flex-direction: row; /* Change to row for horizontal arrangement */
+  flex-direction: row; /*horizontal arrangement */
 }
 
 
@@ -73,26 +88,22 @@ body {
   font-weight: bold;
 
 }
-
-
 .window-container {
-  max-width: 700px;
-  height: 70%;
+  max-width: 750px;
+  height: 55%;
   border: 2px solid white;
-  border-radius: 10px;
+  border-radius: 25px;
   padding: 20px;
 margin: 0 auto;
   box-sizing: border-box;
   background-color: #2A2630;
-
-  /* Center the container horizontally and vertically */
   position: relative;
   top: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  /*transform: translate(-50%, -50%);*/
 }
-
-
 main {
   margin-top: 7%;
   background-color: white;
@@ -111,14 +122,54 @@ main {
 .custom-button {
   margin-top: 2%;
   font-size: 100%;
-  padding: 15px 30px; /* Increase the padding for a bigger size */
+  padding: 15px 30px;
   border-radius: 50px;
   background-color: #fff;
   color: black;
-  border: none; /* Remove the border property */
+  border: none;
   cursor: pointer;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+
+.content-main {
+
+  display: flex;
+  font-family: Futura;
+  font-size: 65%;
+  justify-content: center;
+  gap: 95%;
+  margin-bottom: 20px;
+}
+.inbox-empty-msg
+{
+  /*margin-top: 15%;*/
+  font-size: 100%;
+
+  text-align: center;
+  color: white;
+}
+.content-divider {
+  border-bottom: 3px solid white;
+  width: 110%;
+
+  box-sizing: border-box;
+}
+
+.emptyInboxTitle
+{
+  font-size: 18px;
+  font-family: Roboto Mono,monospace;
+  font-weight: 400;
+  font-style: normal;
+
+}
+
+.mailfloating
+{
+  height: 200px;
+
+}
+
 
 
 
