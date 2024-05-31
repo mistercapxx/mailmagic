@@ -2,8 +2,8 @@ import './App.css';
 import React, {useEffect, useState} from 'react';
 import Mail from './Mail.json';
 import Lottie from "lottie-react";
-import copyImage from '/Users/mistercap/WebstormProjects/jailbreakermail/src/copy-7571066_960_720.webp';
-import titlePhoto from '/Users/mistercap/WebstormProjects/jailbreakermail/src/1492692368-7email_83536.png';
+import copyImage from '../src/copy-7571066_960_720.webp';
+import titlePhoto from '../src/1492692368-7email_83536.png';
 
 function App() {
   const [email, setEmail] = useState('');
@@ -136,10 +136,10 @@ setSelectedEmail({...emailList.find(email => email.id === emailId), ...message})
     updateArticleContent();
 
 
-    // return () => {
+    return () => {
     //   clearInterval(timerInterval);
     //
-    // };
+    };
   },[]);
 
   return (
@@ -152,11 +152,13 @@ setSelectedEmail({...emailList.find(email => email.id === emailId), ...message})
         <div className="mail-section">
           <h2>Your Temporary Mail Address</h2>
           <div className="content-container">
-            <article id="content-copy">template@icloud.com</article>
-            <img id="copyImg" src={copyImage} alt="Copy Image" />
+
+            <article id="content-copy" className="rounded-content">template@icloud.com</article>
+            <img id="copyImg" src={copyImage} alt="Copy Image" className="rounded-image" />
+            </div>
             {/*<p id="countdown"></p>*/}
           </div>
-        </div>
+
         <div className="mailbox-text">
           <p>Forget about spam, advertising mailings, hacking and attacking robots. Keep your real mailbox clean and secure. JailBreak My Mail provides temporary, secure, anonymous, free, disposable email address.</p>
         </div>
