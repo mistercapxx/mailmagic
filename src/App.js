@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Mail from './Mail.json';
 import Lottie from "lottie-react";
 import copyImage from '../src/copy-7571066_960_720.webp';
@@ -8,37 +8,31 @@ import titlePhoto from '../src/1492692368-7email_83536.png';
 function App() {
   const [email, setEmail] = useState('');
   const [emailList, setEmailList] = useState([]);
-  const [selectedEmail,setSelectedEmail] = useState(null);
-  const [positionX,setPositionX] = useState(0);
-  const [positionY,setPositionY] = useState(0);
+  const [selectedEmail, setSelectedEmail] = useState(null);
+  const [positionX, setPositionX] = useState(0);
+  const [positionY, setPositionY] = useState(0);
   // let timerInterval;
 
 
 
-  const getEmail = async () => {
+  const getEmail = () => {
     try {
-      const response = await fetch('http://backend/getEmail', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-       },
-
-      });
-      if (!response.ok) {
-        throw new Error('Failed to fetch email');
-      }
-      const data = await response.json();
-      setEmail(JSON.stringify(data.email));
+      const response = fetch('/api/routers/email').then(res => {
+        return res.json()
+      }).then((res) => {
+        setEmail(res.email)
+      })
     } catch (error) {
       console.error('Error fetching email:', error.message);
     }
   };
+
   const getEmailList = async () => {
     try {
       const response = await fetch('http://backend/getEmailList', {
-        method:'GET'
+        method: 'GET'
       });
-      if(!response.ok) {
+      if (!response.ok) {
         throw new Error('Failed to fetch email list');
       }
       const data = await response.json();
@@ -48,34 +42,35 @@ function App() {
         emailSubject: email.emailSubject,
       })));
     } catch (error) {
-      console.error('Error fetching email list:',error.message);
+      console.error('Error fetching email list:', error.message);
     }
   };
 
   const getMessage = async (emailId) => {
     try {
       const response = await fetch(`http://backend/getMessage?id=${emailId}`, {
-        method:'GET'
+        method: 'GET'
       });
-      if(!response.ok) {
-        throw new Error ('Failed to fetch message');
+      if (!response.ok) {
+        throw new Error('Failed to fetch message');
       }
 
       const data = await response.json();
-      return {messageBody: data.messageBody};
+      return { messageBody: data.messageBody };
     } catch (error) {
-      console.error('Error fetching message:',error.message);
-      return {messageBody: ''};
+      console.error('Error fetching message:', error.message);
+      return { messageBody: '' };
     }
   };
 
   const handleEmailClick = async (emailId) => {
     const message = await getMessage(emailId);
-setSelectedEmail({...emailList.find(email => email.id === emailId), ...message});
+    setSelectedEmail({ ...emailList.find(email => email.id === emailId), ...message });
   };
-      useEffect(() => {
-        getEmail();
-        getEmailList();
+
+  useEffect(() => {
+    getEmail();
+    getEmailList();
 
     // const tenMinutes = 60 * 10;
     // const display = document.getElementById('countdown');
@@ -104,8 +99,7 @@ setSelectedEmail({...emailList.find(email => email.id === emailId), ...message})
     // }
 
     const copyButton = document.getElementById('copyImg');
-    if(copyButton)
-    {
+    if (copyButton) {
       copyButton.addEventListener('click', (event) => {
         const content = document.getElementById('content-copy').textContent;
         navigator.clipboard.writeText(content);
@@ -115,7 +109,7 @@ setSelectedEmail({...emailList.find(email => email.id === emailId), ...message})
 
     function updateArticleContent() {
       const articleContent = document.getElementById('content-copy');
-      articleContent.textContent = generateRandomText();
+      articleContent.textContent = getEmail();
     }
 
     function generateRandomText() {
@@ -133,61 +127,61 @@ setSelectedEmail({...emailList.find(email => email.id === emailId), ...message})
     }
 
     // startTimer(tenMinutes);
-    updateArticleContent();
+    //updateArticleContent();
 
 
     return () => {
-    //   clearInterval(timerInterval);
-    //
+      //   clearInterval(timerInterval);
+      //
     };
-  },[]);
+  }, []);
 
   return (
-      <div>
-        <div className="top-container">
-          <img id="titleImg" src={titlePhoto} alt="Title" className="title-image" />
-          <h1>JailBreak My Mail</h1>
+    <div>
+      <div className="top-container">
+        <img id="titleImg" src={titlePhoto} alt="Title" className="title-image" />
+        <h1>JailBreak My Mail</h1>
+      </div>
+
+      <div className="mail-section">
+        <h2>Your Temporary Mail Address</h2>
+        <div className="content-container">
+
+          <article id="content-copy" className="rounded-content">{setEmail}</article>
+          <img id="copyImg" src={copyImage} alt="Copy Image" className="rounded-image" />
         </div>
+        {/*<p id="countdown"></p>*/}
+      </div>
 
-        <div className="mail-section">
-          <h2>Your Temporary Mail Address</h2>
-          <div className="content-container">
-
-            <article id="content-copy" className="rounded-content">template@icloud.com</article>
-            <img id="copyImg" src={copyImage} alt="Copy Image" className="rounded-image" />
-            </div>
-            {/*<p id="countdown"></p>*/}
+      <div className="mailbox-text">
+        <p>Forget about spam, advertising mailings, hacking and attacking robots. Keep your real mailbox clean and secure. JailBreak My Mail provides temporary, secure, anonymous, free, disposable email address.</p>
+      </div>
+      <main>
+        <div className="window-container">
+          <div className="content-main">
+            <h1>Sender</h1>
+            <h1>Subject</h1>
+            <h1>View</h1>
           </div>
-
-        <div className="mailbox-text">
-          <p>Forget about spam, advertising mailings, hacking and attacking robots. Keep your real mailbox clean and secure. JailBreak My Mail provides temporary, secure, anonymous, free, disposable email address.</p>
-        </div>
-        <main>
-          <div className="window-container">
-            <div className="content-main">
-              <h1>Sender</h1>
-              <h1>Subject</h1>
-              <h1>View</h1>
-            </div>
-            <div className="content-divider"></div>
-            <div className="lower-content">
-          <br/>
-            <br/>
+          <div className="content-divider"></div>
+          <div className="lower-content">
+            <br />
+            <br />
             <div className="inbox-empty-msg">
-           <Lottie className="mailfloating" animationData={Mail}/>
+              <Lottie className="mailfloating" animationData={Mail} />
               <div className="emptyInboxTitle">
                 <p>Your inbox is empty</p>
-              <p>Waiting for incoming emails</p>
-            </div>
+                <p>Waiting for incoming emails</p>
+              </div>
               {/*<h1>Email: {email}</h1>*/}
               {/*<h2>Email List:</h2>*/}
               <ul>
                 {emailList.map(email => (
-                    <li key={email.id} onClick={() => handleEmailClick(email.id)}>
-                      <p>ID: {email.id}</p>
-                      <p>Date Received: {email.dateReceived}</p>
-                      <p>Email Subject: {email.emailSubject}</p>
-                    </li>
+                  <li key={email.id} onClick={() => handleEmailClick(email.id)}>
+                    <p>ID: {email.id}</p>
+                    <p>Date Received: {email.dateReceived}</p>
+                    <p>Email Subject: {email.emailSubject}</p>
+                  </li>
                 ))}
               </ul>
               {/*{selectedEmail && (*/}
@@ -199,11 +193,11 @@ setSelectedEmail({...emailList.find(email => email.id === emailId), ...message})
               {/*      <p>Message Body: {selectedEmail.messageBody}</p>*/}
               {/*    </div>*/}
               {/*)} */}
+            </div>
           </div>
-          </div>
-          </div>
-        </main>
-      </div>
+        </div>
+      </main>
+    </div>
 
 
   );
