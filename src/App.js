@@ -7,70 +7,70 @@ import titlePhoto from '../src/1492692368-7email_83536.png';
 
 function App() {
   const [email, setEmail] = useState('');
-  const [emailList, setEmailList] = useState([]);
-  const [selectedEmail, setSelectedEmail] = useState(null);
-  const [positionX, setPositionX] = useState(0);
-  const [positionY, setPositionY] = useState(0);
+  // const [emailList, setEmailList] = useState([]);
+  // const [selectedEmail, setSelectedEmail] = useState(null);
+  // const [positionX, setPositionX] = useState(0);
+  // const [positionY, setPositionY] = useState(0);
   // let timerInterval;
 
 
 
-  const getEmail = () => {
+  const getEmail = async () => {
     try {
-      const response = fetch('/api/routers/email').then(res => {
-        return res.json()
-      }).then((res) => {
-        setEmail(res.email)
-      })
+      const response = await fetch('http://localhost:3050/api/routers/email');
+      const data = await response.json();
+    
+        setEmail(data.email);
+      
     } catch (error) {
       console.error('Error fetching email:', error.message);
     }
   };
 
-  const getEmailList = async () => {
-    try {
-      const response = await fetch('http://backend/getEmailList', {
-        method: 'GET'
-      });
-      if (!response.ok) {
-        throw new Error('Failed to fetch email list');
-      }
-      const data = await response.json();
-      setEmailList(data.map(email => ({
-        id: email.id,
-        dateReceived: email.dateReceived,
-        emailSubject: email.emailSubject,
-      })));
-    } catch (error) {
-      console.error('Error fetching email list:', error.message);
-    }
-  };
+  // const getEmailList = async () => {
+  //   try {
+  //     const response = await fetch('http://backend/getEmailList', {
+  //       method: 'GET'
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch email list');
+  //     }
+  //     const data = await response.json();
+  //     setEmailList(data.map(email => ({
+  //       id: email.id,
+  //       dateReceived: email.dateReceived,
+  //       emailSubject: email.emailSubject,
+  //     })));
+  //   } catch (error) {
+  //     console.error('Error fetching email list:', error.message);
+  //   }
+  // };
 
-  const getMessage = async (emailId) => {
-    try {
-      const response = await fetch(`http://backend/getMessage?id=${emailId}`, {
-        method: 'GET'
-      });
-      if (!response.ok) {
-        throw new Error('Failed to fetch message');
-      }
+  // const getMessage = async (emailId) => {
+  //   try {
+  //     const response = await fetch(`http://backend/getMessage?id=${emailId}`, {
+  //       method: 'GET'
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch message');
+  //     }
 
-      const data = await response.json();
-      return { messageBody: data.messageBody };
-    } catch (error) {
-      console.error('Error fetching message:', error.message);
-      return { messageBody: '' };
-    }
-  };
+  //     const data = await response.json();
+  //     return { messageBody: data.messageBody };
+  //   } catch (error) {
+  //     console.error('Error fetching message:', error.message);
+  //     return { messageBody: '' };
+  //   }
+  // };
 
-  const handleEmailClick = async (emailId) => {
-    const message = await getMessage(emailId);
-    setSelectedEmail({ ...emailList.find(email => email.id === emailId), ...message });
-  };
+  // const handleEmailClick = async (emailId) => {
+  //   const message = await getMessage(emailId);
+  //   setSelectedEmail({ ...emailList.find(email => email.id === emailId), ...message });
+  // };
 
   useEffect(() => {
     getEmail();
-    getEmailList();
+    // getEmailList();
 
     // const tenMinutes = 60 * 10;
     // const display = document.getElementById('countdown');
@@ -98,43 +98,39 @@ function App() {
     //
     // }
 
-    const copyButton = document.getElementById('copyImg');
-    if (copyButton) {
-      copyButton.addEventListener('click', (event) => {
-        const content = document.getElementById('content-copy').textContent;
-        navigator.clipboard.writeText(content);
-      });
-    }
+    // const copyButton = document.getElementById('copyImg');
+    // if (copyButton) {
+    //   copyButton.addEventListener('click', (event) => {
+    //     const content = document.getElementById('content-copy').textContent;
+    //     navigator.clipboard.writeText(content);
+    //   });
+    // }
 
 
-    function updateArticleContent() {
-      const articleContent = document.getElementById('content-copy');
-      articleContent.textContent = getEmail();
-    }
+    // function updateArticleContent() {
+    //   const articleContent = document.getElementById('content-copy');
+    //   articleContent.textContent = getEmail();
+    // }
 
-    function generateRandomText() {
+    // function generateRandomText() {
 
-      const textArray = [
-        'pazhiloy@icloud.com',
-        'chinazes@yahoo.com',
-        'lilyomg@gmail.com',
-        'killa@rambler.com',
+    //   const textArray = [
+    //     'pazhiloy@icloud.com',
+    //     'chinazes@yahoo.com',
+    //     'lilyomg@gmail.com',
+    //     'killa@rambler.com',
 
-      ];
+    //   ];
 
-      const randomIndex = Math.floor(Math.random() * textArray.length);
-      return textArray[randomIndex];
-    }
+    //   const randomIndex = Math.floor(Math.random() * textArray.length);
+    //   return textArray[randomIndex];
+    // }
 
     // startTimer(tenMinutes);
     //updateArticleContent();
 
 
-    return () => {
-      //   clearInterval(timerInterval);
-      //
-    };
-  }, []);
+  }, );
 
   return (
     <div>
@@ -147,7 +143,7 @@ function App() {
         <h2>Your Temporary Mail Address</h2>
         <div className="content-container">
 
-          <article id="content-copy" className="rounded-content">{setEmail}</article>
+        <article id="content-copy" className="rounded-content">{email}</article>
           <img id="copyImg" src={copyImage} alt="Copy Image" className="rounded-image" />
         </div>
         {/*<p id="countdown"></p>*/}
@@ -175,7 +171,7 @@ function App() {
               </div>
               {/*<h1>Email: {email}</h1>*/}
               {/*<h2>Email List:</h2>*/}
-              <ul>
+              {/* <ul>
                 {emailList.map(email => (
                   <li key={email.id} onClick={() => handleEmailClick(email.id)}>
                     <p>ID: {email.id}</p>
@@ -183,7 +179,7 @@ function App() {
                     <p>Email Subject: {email.emailSubject}</p>
                   </li>
                 ))}
-              </ul>
+              </ul> */}
               {/*{selectedEmail && (*/}
               {/*    <div>*/}
               {/*      <h2>Selected Email:</h2>*/}
